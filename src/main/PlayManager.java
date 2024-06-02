@@ -1,8 +1,6 @@
 package main;
 
-import Tetromino.Block;
-import Tetromino.Mino;
-import Tetromino.Mino_T;
+import Tetromino.*;
 
 import java.awt.*;
 
@@ -28,7 +26,7 @@ public class PlayManager {
         MINO_START_X = left_x+ WIDTH/2 - Block.SIZE;
         MINO_START_Y = top_y + Block.SIZE;
 
-        currentMino = new Mino_T();
+        currentMino = new Mino_Z2();
         currentMino.setXY(MINO_START_X,MINO_START_Y);
     }
     public void update(){
