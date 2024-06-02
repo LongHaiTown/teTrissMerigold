@@ -24,7 +24,7 @@ public class PlayManager {
     final int NEXTMINO_START_X;
     final int NEXTMINO_START_Y;
     public static ArrayList<Block> staticblock = new ArrayList<>();
-    public static int dropInterval = 60;
+    public static int dropInterval = 15;
     public PlayManager(){
         left_x=  (GamePanel.WIDTH/2) - (WIDTH/2);
         right_x = left_x + WIDTH;

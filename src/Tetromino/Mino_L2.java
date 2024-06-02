@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Mino_L2 extends Mino{
     public Mino_L2(){
-        super.create(Color.white);
+        super.create();
     }
     public void setXY(int x, int y){
         //o o o

@@ -4,6 +4,7 @@ import main.PlayManager;
 
 import java.awt.*;
 import java.security.Key;
+import java.util.Random;
 
 public class Mino {
     public Block b[] = new Block[4];
@@ -17,7 +18,18 @@ public class Mino {
 
     public boolean activate = true;
 
-    public void create(Color c){
+    public Color c;
+
+    public void getRandomColor() {
+        Random rand = new Random();
+        int red = rand.nextInt(256); // Giá trị ngẫu nhiên từ 0 đến 255 cho màu đỏ
+        int green = rand.nextInt(256); // Giá trị ngẫu nhiên từ 0 đến 255 cho màu xanh lá cây
+        int blue = rand.nextInt(256); // Giá trị ngẫu nhiên từ 0 đến 255 cho màu xanh dương
+        c = new Color(red, green, blue);
+    }
+
+    public void create(){
+        getRandomColor();
         b[0] = new Block(c);
         b[1] = new Block(c);
         b[2] = new Block(c);

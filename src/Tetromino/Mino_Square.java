@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Mino_Square extends Mino{
     public Mino_Square(){
-        super.create(Color.BLUE);
+        super.create();
     }
     public void setXY(int x, int y){
         //o o o

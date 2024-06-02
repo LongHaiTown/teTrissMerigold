@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Mino_T extends Mino{
     public Mino_T(){
-        super.create(Color.orange);
+        super.create();
     }
     public void setXY(int x, int y){
         //o o o
