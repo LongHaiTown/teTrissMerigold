@@ -16,6 +16,7 @@ public class Mino {
     boolean leftCollision,rightCollision,bottomCollision;
 
     public boolean activate = true;
+
     public void create(Color c){
         b[0] = new Block(c);
         b[1] = new Block(c);
