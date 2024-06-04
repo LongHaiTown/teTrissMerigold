@@ -63,7 +63,7 @@ public class Mino {
         leftCollision = false;
         rightCollision = false;
         bottomCollision = false;
-
+        checkStaticCollision();
         for (int i = 0 ; i< b.length; i++){
             if(b[i].x == PlayManager.left_x){
                 leftCollision = true;
@@ -101,6 +101,24 @@ public class Mino {
             }
         }
     }
+    public void checkStaticCollision(){
+        for( int i = 0; i< PlayManager.staticblock.size() ; i++){
+            int targetX = PlayManager.staticblock.get(i).x;
+            int targetY = PlayManager.staticblock.get(i).y;
+            for (int j =0; j< b.length ; j++) {
+                if (b[j].x  == targetX && b[j].y + Block.SIZE == targetY)
+                    bottomCollision = true;
+            }
+            for (int j =0; j< b.length ; j++) {
+                if (b[j].x - Block.SIZE == targetX && b[j].y == targetY)
+                    leftCollision = true;
+            }
+            for (int j =0; j< b.length ; j++) {
+                if (b[j].x + Block.SIZE == targetX && b[j].y == targetY)
+                    rightCollision = true;
+            }
+        }
+    }
     public void update(){
         if (KeyHandler.upPressed ){
             switch(direction){
@@ -113,11 +131,13 @@ public class Mino {
         }
         checkMovementCollision();
         if (KeyHandler.downPressed && activate == true ){
-            this.b[0].y += b[0].SIZE/4;
-            this.b[1].y += b[1].SIZE/4;
-            this.b[2].y += b[2].SIZE/4;
-            this.b[3].y += b[3].SIZE/4;
-            KeyHandler.upPressed = false;
+            this.b[0].y += b[0].SIZE;
+            this.b[1].y += b[1].SIZE;
+            this.b[2].y += b[2].SIZE;
+            this.b[3].y += b[3].SIZE;
+
+            autoDropCounter = 0;
+            KeyHandler.downPressed = false;
         }
         if (KeyHandler.leftPressed ){
             if (leftCollision == false && activate == true) {
