@@ -18,6 +18,8 @@ public class Mino {
 
     public boolean activate = true;
 
+    public boolean deActivating;
+    public int deActivatingCounter =0;
     public Color c;
 
     public void getRandomColor() {
@@ -75,7 +77,7 @@ public class Mino {
             }
         }
         for (int i = 0 ; i< b.length; i++){
-            if(b[i].y + Block.SIZE >= PlayManager.bottom_y){
+            if(b[i].y + Block.SIZE == PlayManager.bottom_y){
                 bottomCollision = true;
             }
         }
@@ -84,6 +86,8 @@ public class Mino {
         leftCollision = false;
         rightCollision = false;
         bottomCollision = false;
+
+        checkStaticCollision();
 
         for (int i = 0 ; i< b.length; i++){
             if(tempB[i].x < PlayManager.left_x){
@@ -120,6 +124,9 @@ public class Mino {
         }
     }
     public void update(){
+        if (deActivating) {
+            deActivating();
+        }
         if (KeyHandler.upPressed ){
             switch(direction){
                 case 's':getDirectionW();break;
@@ -130,13 +137,15 @@ public class Mino {
             KeyHandler.upPressed = false;
         }
         checkMovementCollision();
-        if (KeyHandler.downPressed && activate == true ){
-            this.b[0].y += b[0].SIZE;
-            this.b[1].y += b[1].SIZE;
-            this.b[2].y += b[2].SIZE;
-            this.b[3].y += b[3].SIZE;
+        if (KeyHandler.downPressed && activate == true ) {
+            if (bottomCollision == false){
+                this.b[0].y += b[0].SIZE;
+                this.b[1].y += b[1].SIZE;
+                this.b[2].y += b[2].SIZE;
+                this.b[3].y += b[3].SIZE;
 
-            autoDropCounter = 0;
+                autoDropCounter = 0;
+            }
             KeyHandler.downPressed = false;
         }
         if (KeyHandler.leftPressed ){
@@ -158,7 +167,7 @@ public class Mino {
             }
         }
         if (bottomCollision){
-            activate = false;
+            deActivating = true ;
         }else {
             autoDropCounter++;
             if (autoDropCounter == PlayManager.dropInterval) {
@@ -168,6 +177,15 @@ public class Mino {
                 b[3].y += Block.SIZE;
                 autoDropCounter = 0;
             }
+        }
+    }
+    public void deActivating(){
+        deActivatingCounter ++;
+        if (deActivatingCounter == 30) {
+            deActivatingCounter = 0;
+            checkMovementCollision();
+            if (bottomCollision)
+                activate =false;
         }
     }
     public void draw(Graphics2D g2){

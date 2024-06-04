@@ -82,6 +82,8 @@ public class PlayManager {
             staticblock.add(currentMino.b[2]);
             staticblock.add(currentMino.b[3]);
 
+            currentMino.deActivating = false;
+
             currentMino = nextMino;
             currentMino.setXY(MINO_START_X,MINO_START_Y);
             nextMino = pickMino();
