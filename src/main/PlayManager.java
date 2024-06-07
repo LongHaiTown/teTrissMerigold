@@ -89,10 +89,40 @@ public class PlayManager {
             nextMino = pickMino();
             nextMino.setXY(NEXTMINO_START_X,NEXTMINO_START_Y);
 
+            checkDelete();
         }else currentMino.update();
 //        currentMino.update();
     }
-
+    public void checkDelete(){
+        int x = left_x;
+        int y = top_y;
+        int blockcount = 0;
+        while ( x < right_x && y< bottom_y ){
+            for (int i = 0; i<staticblock.size(); i++){
+                if (staticblock.get(i).x == x && staticblock.get(i).y == y){
+                    blockcount ++;
+                }
+            }
+            x+= Block.SIZE;
+            if (x== right_x){
+                if (blockcount == 12){
+                    for (int i = staticblock.size()-1; i>-1; i--){
+                        if(staticblock.get(i).y == y){
+                            staticblock.remove(i);
+                        }
+                    }
+                    for (int i = 0; i<staticblock.size(); i++){
+                        if (staticblock.get(i).y<y){
+                            staticblock.get(i).y += Block.SIZE;
+                        }
+                    }
+                }
+                blockcount = 0;
+                x = left_x;
+                y+= Block.SIZE;
+            }
+        }
+    }
     public void draw(Graphics2D g2){
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke(4f));
