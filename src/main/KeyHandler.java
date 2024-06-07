@@ -9,8 +9,7 @@ public class KeyHandler implements KeyListener {
     public static boolean downPressed;
     public static boolean leftPressed;
     public static boolean rightPressed;
-    public static boolean rotateClockwise;
-    public static boolean rotateCounterClockwise;
+    public static boolean pausePressed;
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -42,13 +41,10 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
-        if (code == KeyEvent.VK_J) {
-            rotateClockwise = true;
-        }
-
-        if (code == KeyEvent.VK_J) {
-            rotateCounterClockwise = true;
-        }
+        if (code == KeyEvent.VK_SPACE)
+            if(pausePressed)
+                pausePressed = false;
+            else pausePressed = true;
     }
 
     @Override

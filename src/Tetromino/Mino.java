@@ -181,7 +181,7 @@ public class Mino {
     }
     public void deActivating(){
         deActivatingCounter ++;
-        if (deActivatingCounter == 30) {
+        if (deActivatingCounter == 15) {
             deActivatingCounter = 0;
             checkMovementCollision();
             if (bottomCollision)
